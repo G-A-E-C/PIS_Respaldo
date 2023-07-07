@@ -4,7 +4,11 @@
  */
 package vista;
 
+import java.awt.Color;
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,10 +32,23 @@ public class FrmLogin extends javax.swing.JDialog {
     public void cargarFecha() {
         Calendar cal = Calendar.getInstance();
         String fecha, hora;
-        fecha = cal.get(Calendar.DATE) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR);
+        String[] fechaMes = new DateFormatSymbols().getMonths();
+        String nombreMes = fechaMes[cal.get(Calendar.MONTH)];
+        fecha = cal.get(Calendar.DATE) + " de  " + nombreMes + "  del " + cal.get(Calendar.YEAR);
         hora = cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
         this.lblFecha1.setText(fecha);
         this.lblHora1.setText(hora);
+//Calendar cal = Calendar.getInstance();
+//String fecha, hora;
+//
+//SimpleDateFormat formatoFecha = new SimpleDateFormat("dd MMMM yyyy", new Locale("es", "ES"));
+//fecha = formatoFecha.format(cal.getTime());
+//
+//SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+//hora = formatoHora.format(cal.getTime());
+//
+//this.lblFecha1.setText(fecha);
+//this.lblHora1.setText(hora);
 
     }
 
@@ -53,7 +70,6 @@ public class FrmLogin extends javax.swing.JDialog {
         lblContraseña = new javax.swing.JLabel();
         lblCedula = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
-        txtCOntraseña = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
         lblFecha1 = new javax.swing.JLabel();
@@ -61,6 +77,7 @@ public class FrmLogin extends javax.swing.JDialog {
         lblHora1 = new javax.swing.JLabel();
         lblSesion = new javax.swing.JLabel();
         lblLogin = new javax.swing.JLabel();
+        jContraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -96,41 +113,60 @@ public class FrmLogin extends javax.swing.JDialog {
 
         lblLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login.png"))); // NOI18N
 
+        jContraseña.setBackground(new java.awt.Color(255, 255, 255));
+        jContraseña.setText("****************");
+        jContraseña.setBorder(null);
+        jContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jContraseñaMouseClicked(evt);
+            }
+        });
+        jContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jContraseñaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel1))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(190, 190, 190)
-                .addComponent(lblSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnIngresar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(190, 190, 190)
-                .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(lblCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(lblContraseña)
-                .addGap(34, 34, 34)
-                .addComponent(txtCOntraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(190, 190, 190)
-                .addComponent(btnIngresar))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblFecha)
-                .addGap(15, 15, 15)
-                .addComponent(lblFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(140, 140, 140)
-                .addComponent(lblHora)
-                .addGap(32, 32, 32)
-                .addComponent(lblHora1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addComponent(lblSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(lblFecha)
+                        .addGap(15, 15, 15)
+                        .addComponent(lblFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88)
+                        .addComponent(lblHora)
+                        .addGap(32, 32, 32)
+                        .addComponent(lblHora1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblContraseña)
+                                .addGap(341, 341, 341))
+                            .addComponent(jLabel1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(lblCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jContraseña)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,11 +181,15 @@ public class FrmLogin extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCedula)
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblContraseña)
-                    .addComponent(txtCOntraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lblContraseña)
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
                 .addComponent(btnIngresar)
                 .addGap(107, 107, 107)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,21 +218,48 @@ public class FrmLogin extends javax.swing.JDialog {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
 
-if (!ValidarUsuario(txtCedula.getText().trim())) {
-    JOptionPane.showMessageDialog(rootPane, "La cédula es incorrecta:");
-} else {
-    if (txtCedula.getText().trim().length() == 10) {
-        JOptionPane.showMessageDialog(rootPane, "La cédula es Correcta.");
-//        dispose();
-//        FrmCandidatos dialog = new FrmCandidatos(new javax.swing.JFrame(), true);
-//        dialog.setVisible(true);
-    } 
+        String usuario = txtCedula.getText().trim(),contra = jContraseña.getText().trim();;
+
+        if (!ValidarUsuario(usuario)) {
+            JOptionPane.showMessageDialog(rootPane, "La cédula es incorrecta:");
+        } else {
+            if (usuario.length() == 10 && usuario.equals(contra)) {
+                JOptionPane.showMessageDialog(rootPane, "Bienvenido.");//La cédula es Correcta:
+                dispose();
+               FrmPadron dialog = new FrmPadron(new java.awt.Frame(), true);
+                dialog.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "La cédula o contraseña es incorrecta.");
+            }
+//este codigo es el que funcionaba antes 
+//////////////if (!ValidarUsuario(txtCedula.getText().trim())) {
+//////////////    JOptionPane.showMessageDialog(rootPane, "La cédula es incorrecta:");
+//////////////} else {
+//////////////    if (txtCedula.getText().trim().length() == 10) {
+//////////////        JOptionPane.showMessageDialog(rootPane, "La cédula es Correcta.");
+//////////////        dispose();
+//////////////        FrmCandidatos dialog = new FrmCandidatos(new javax.swing.JFrame(), true);
+//////////////        dialog.setVisible(true);
+//////////////    } 
 //    else {
 //        JOptionPane.showMessageDialog(rootPane, "La cédula debe tener 10 dígitos.");
 //    }
-}
+    }
 
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void jContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jContraseñaActionPerformed
+
+    }//GEN-LAST:event_jContraseñaActionPerformed
+
+    private void jContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jContraseñaMouseClicked
+        // TODO add your handling code here:
+        if(String.valueOf(jContraseña.getPassword()).equals("****************")){
+            jContraseña.setText("");
+            jContraseña.setForeground(Color.black);
+
+        }
+    }//GEN-LAST:event_jContraseñaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -238,6 +305,7 @@ if (!ValidarUsuario(txtCedula.getText().trim())) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
+    private javax.swing.JPasswordField jContraseña;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCedula;
@@ -248,7 +316,6 @@ if (!ValidarUsuario(txtCedula.getText().trim())) {
     private javax.swing.JLabel lblHora1;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblSesion;
-    private javax.swing.JTextField txtCOntraseña;
     private javax.swing.JTextField txtCedula;
     // End of variables declaration//GEN-END:variables
 }

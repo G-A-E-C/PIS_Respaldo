@@ -21,6 +21,7 @@ public class FrmPadron extends java.awt.Dialog {
     public FrmPadron(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         cargarFecha();
         cargarTabla();
     }
